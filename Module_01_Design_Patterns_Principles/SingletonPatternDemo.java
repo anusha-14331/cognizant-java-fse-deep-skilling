@@ -1,15 +1,15 @@
 package Module_01_Design_Patterns_Principles;
 class Singleton {
 
-    // Create a single object
+   
     private static Singleton instance;
 
-    // Private constructor
+   
     private Singleton() {
         System.out.println("Singleton Object Created");
     }
 
-    // Method to get the single object
+    
     public static Singleton getInstance() {
         if (instance == null) {
             instance = new Singleton();
