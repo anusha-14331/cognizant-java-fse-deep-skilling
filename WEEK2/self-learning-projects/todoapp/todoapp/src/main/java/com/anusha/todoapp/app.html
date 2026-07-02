@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo App</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+        }
+
+        input {
+            padding: 10px;
+            width: 200px;
+        }
+
+        button {
+            padding: 10px;
+            margin-left: 5px;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>📝 My Todo List</h2>
+
+<input type="text" id="title" placeholder="Enter todo">
+<button onclick="addTodo()">Add</button>
+
+<h3>Tasks:</h3>
+<ul id="list"></ul>
+
+<script>
+
+    const API = "http://localhost:8080/api/todos";
+
+    // 🔹 Load all todos
+    function loadTodos() {
+        fetch(API)
+        .then(res => res.json())
+        .then(data => {
+            let list = document.getElementById("list");
+            list.innerHTML = "";
+
+            data.forEach(todo => {
+                let li = document.createElement("li");
+
+                li.innerHTML = `
+                    ${todo.title}
+                    <button onclick="deleteTodo(${todo.id})">❌</button>
+                `;
+
+                list.appendChild(li);
+            });
+        });
+    }
+
+    // 🔹 Add todo
+    function addTodo() {
+        let title = document.getElementById("title").value;
+
+        fetch(API, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                title: title,
+                completed: false
+            })
+        })
+        .then(() => {
+            document.getElementById("title").value = "";
+            loadTodos();
+        });
+    }
+
+    // 🔹 Delete todo
+    function deleteTodo(id) {
+        fetch(`${API}/${id}`, {
+            method: "DELETE"
+        })
+        .then(() => loadTodos());
+    }
+
+    // Load on page start
+    loadTodos();
+
+</script>
+
+</body>
+</html>
