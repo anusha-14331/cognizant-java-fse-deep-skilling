@@ -1,0 +1,55 @@
+.course-card{
+
+    width:260px;
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    text-align:center;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+
+    transition:.3s;
+
+}
+
+.course-card:hover{
+
+    transform:translateY(-10px);
+    box-shadow:0 12px 25px rgba(0,0,0,.2);
+
+}
+
+.course-card h2{
+
+    color:#1565c0;
+    margin-bottom:15px;
+
+}
+
+.course-card p{
+
+    margin:10px 0;
+    color:#555;
+    font-size:16px;
+
+}
+
+.enroll-button{
+
+    margin-top:15px;
+    background:#1565c0;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+    transition:.3s;
+
+}
+
+.enroll-button:hover{
+
+    background:#0d47a1;
+
+}
